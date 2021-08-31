@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What forces layout / reflow: box-metrics: offset-left</title>
+    <style>
+        #theElement {
+            border: 1px solid black;
+        }
+        .some-padding {
+            padding: 10px;
+        }
+        .some-margin {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="theElement">The Element</div>
+</body>
+<script>
+    const theElement = document.getElementById("theElement");
+    const action = () => {
+        console.log("start");
+        performance.mark("mark-start");
+        theElement.classList.add("some-padding");
+        performance.mark("mark1");
+        console.log(theElement.offsetLeft);
+        performance.mark("mark2");
+        theElement.classList.add("some-margin");
+        performance.mark("mark3");
+        console.log(theElement.offsetLeft);
+        performance.mark("mark-end");
+        console.log("end");
+    };
+    requestAnimationFrame(action);
+</script>
+</html>

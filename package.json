@@ -1,0 +1,25 @@
+{
+  "name": "what-forces-layout-reflow",
+  "version": "1.0.0",
+  "description": "Let's automatically test [paulirish/what-forces-layout.md](https://gist.github.com/paulirish/5d52fb081b3570c81e3a).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/htho/what-forces-layout-reflow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/htho/what-forces-layout-reflow/issues"
+  },
+  "homepage": "https://github.com/htho/what-forces-layout-reflow#readme",
+  "dependencies": {
+    "puppeteer": "^10.2.0"
+  }
+}
