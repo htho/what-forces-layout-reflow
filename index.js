@@ -17,7 +17,7 @@ const consoleLogsMessage = (page, message="", timeout=1000) => new Promise((reso
     });
 });
 
-async function runTest(relPathToHtml="tests/box-metrics/offset-left.html", expectedRecalcStyleCount=0) {
+async function runTestInner(relPathToHtml="tests/box-metrics/offset-left.html", expectedRecalcStyleCount=0) {
     const browser = await puppeteer.launch({});
     const page = await browser.newPage();
     const metricsPath = path.join(__dirname, "tests", "box-metrics", "offset-left.metrics.json");
@@ -31,6 +31,13 @@ async function runTest(relPathToHtml="tests/box-metrics/offset-left.html", expec
     await browser.close();
     if(result.RecalcStyleCount !== expectedRecalcStyleCount) console.error(`!!! ${relPathToHtml} did not have the expected amount of style recalculations. Expected: ${expectedRecalcStyleCount}. Actual: ${result.RecalcStyleCount}.`);
     else console.log(`${relPathToHtml} had the expected amount of style recalculations. Expected&Actual: ${expectedRecalcStyleCount}.`);
+}
+async function runTest(relPathToHtml="tests/box-metrics/offset-left.html", expectedRecalcStyleCount=0) {
+    try {
+        await runTestInner(relPathToHtml, expectedRecalcStyleCount);
+    } catch (error) {
+        console.error(`!!! ${relPathToHtml} Exception thrown:`, error);
+    }
 }
 
 (async () => {
