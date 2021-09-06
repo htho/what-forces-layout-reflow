@@ -21,16 +21,16 @@ async function runTestInner(relPathToHtml="") {
         const tracingPath = path.join(__dirname, relPathToHtml) + ".json";
         const screenshotPath = path.join(__dirname, relPathToHtml) + ".png";
         
-    const browser = await puppeteer.launch({});
-    const page = await browser.newPage();
+        const browser = await puppeteer.launch({});
+        const page = await browser.newPage();
         
         await page.tracing.start({path: tracingPath});
-    await page.goto(`file://${__dirname}/${relPathToHtml}`);
-    await consoleLogsMessage(page, "end");
-    await page.tracing.stop()
-    const result = await page.metrics();
+        await page.goto(`file://${__dirname}/${relPathToHtml}`);
+        await consoleLogsMessage(page, "end");
+        await page.tracing.stop()
+        const result = await page.metrics();
         await page.screenshot({path: screenshotPath, type: "png"});
-    await browser.close();
+        await browser.close();
     
         return result;
     } catch (error) {
@@ -50,6 +50,9 @@ async function runTest({testFile = "", expected = {RecalcStyleCount: 0, LayoutCo
 }
 
 (async () => {
-    await(runTest("tests/box-metrics/offset-left.html", 3));
-    await(runTest("tests/box-metrics/offset-top.html", 0));
+    await(runTest({testFile: "box-metrics/offset-left.html", expected: {RecalcStyleCount: 3, LayoutCount: 3}}));
+    await(runTest({testFile: "box-metrics/offset-top.html", expected: {RecalcStyleCount: 3, LayoutCount: 3}}));
+    await(runTest({testFile: "dom-manipulation/insert-visible-element.html", expected: {RecalcStyleCount: 2, LayoutCount: 2}}));
+    await(runTest({testFile: "dom-manipulation/insert-display-none-element.html", expected: {RecalcStyleCount: 2, LayoutCount: 1}}));
+    await(runTest({testFile: "dom-manipulation/insert-visibility-hidden-element.html", expected: {RecalcStyleCount: 2, LayoutCount: 2}}));
 })();

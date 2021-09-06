@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What forces layout / reflow: box-metrics: offset-left</title>
     <style>
-        #theElement {
+        div {
             border: 1px solid black;
         }
         .some-padding {
@@ -22,17 +22,12 @@
 </body>
 <script>
     const theElement = document.getElementById("theElement");
+    const newElement = document.createElement("div");
     const action = () => {
         console.log("start");
         performance.mark("mark-start");
-        theElement.classList.add("some-padding");
-        performance.mark("mark1");
         console.log(theElement.offsetTop);
-        performance.mark("mark2");
-        theElement.classList.add("some-margin");
-        performance.mark("mark3");
-        console.log(theElement.offsetTop);
-        performance.mark("mark4");
+        document.body.insertAdjacentElement("afterbegin", newElement);
         console.log(theElement.offsetTop);
         performance.mark("mark-end");
         console.log("end");
