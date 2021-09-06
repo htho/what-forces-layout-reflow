@@ -20,6 +20,11 @@ steps:
   displayName: 'npm install'
 
 - script: |
-    npm run test
-  displayName: 'npm run test'
-  failOnStderr: true
+    ./node_modules/.bin/jest --reporters="default" --reporters="jest-junit"
+  displayName: 'run tests'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'junit.xml'
+    failTaskOnFailedTests: true
