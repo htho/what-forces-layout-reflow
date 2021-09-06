@@ -20,7 +20,7 @@ steps:
   displayName: 'npm install'
 
 - script: |
-    ./node_modules/.bin/jest.cmd --reporters="default" --reporters="jest-junit"
+    ./node_modules/.bin/jest --reporters="default" --reporters="jest-junit"
   displayName: 'run tests'
 
 - task: PublishTestResults@2
