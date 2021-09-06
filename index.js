@@ -5,7 +5,7 @@ const puppeteer = require("puppeteer");
  * @param {puppeteer.Page} page
  * @returns {Promise<void>}
  */
-const consoleLogsMessage = (page, message="", timeout=1000) => new Promise((resolve, reject) => {
+const consoleLogsMessage = (page, message="", timeout=3000) => new Promise((resolve, reject) => {
     const handle = setTimeout(() => reject(new Error(`consoleLogsMessage timed out after ${timeout}ms. The message "${message}" was never logged!`)), timeout);
     const url = page.url();
     page.on("console", (ev) => {
