@@ -1,7 +1,0 @@
-{
-    "compilerOptions": {
-        "alwaysStrict": true,
-        "checkJs": true,
-        "strict": true,
-    }
-}
